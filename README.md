@@ -1,0 +1,1 @@
+# Jeremy's scaffold to initialize a new project

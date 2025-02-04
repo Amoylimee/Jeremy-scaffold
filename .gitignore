@@ -1,0 +1,7 @@
+# ignore all
+*
+
+# except for these files
+!.gitignore
+!README.md
+!scaffold.py
