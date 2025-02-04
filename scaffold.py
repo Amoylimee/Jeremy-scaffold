@@ -130,7 +130,7 @@ if __name__ == "__main__":
     
     # Get project paths
     paths = setup_paths()
-    print("\nProject paths:")
+    print("Project paths:")
     for key, path in paths.items():
         print(f"{key}: {path}")
 '''
