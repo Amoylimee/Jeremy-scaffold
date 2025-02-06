@@ -144,8 +144,9 @@ def create_project(project_name: str, base_path: Path) -> None:
     
     # Create basic directories
     directories = [
-        'data/',            # Raw data
+        'data',            # Raw data
         'output',           # Output files
+        'tests',           # Tests 
         'logs',            # Log files
         'bash'             # Bash scripts
     ]
