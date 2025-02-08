@@ -130,7 +130,7 @@ if __name__ == "__main__":
     
     # Get project paths
     paths = setup_paths()
-    print("Project paths:")
+    print("\nProject paths:")
     for key, path in paths.items():
         print(f"{key}: {path}")
 '''
@@ -144,9 +144,8 @@ def create_project(project_name: str, base_path: Path) -> None:
     
     # Create basic directories
     directories = [
-        'data',            # Raw data
+        'data/',            # Raw data
         'output',           # Output files
-        'tests',           # Tests 
         'logs',            # Log files
         'bash'             # Bash scripts
     ]
@@ -163,6 +162,18 @@ def create_project(project_name: str, base_path: Path) -> None:
     # Create and initialize run.bash
     create_run_bash(project_path)
     os.chmod(project_path / 'run.bash', 0o755)
+
+    # 创建 .gitignore 文件
+    gitignore_content = '''# ignore all
+*
+
+# except for these files
+!.gitignore
+!*.py
+!*.bash'''
+
+    with open(project_path / '.gitignore', 'w') as f:
+        f.write(gitignore_content)
 
 def main():
     parser = argparse.ArgumentParser(description='Create a new project structure')
