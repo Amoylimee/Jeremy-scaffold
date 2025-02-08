@@ -82,9 +82,9 @@ echo -e "\nPipeline execution completed at $(date)" | tee -a "$LOG_FILE"
         f.write(run_bash_content)
     os.chmod(project_path / 'run.bash', 0o755)
 
-def create_functions_helpers(project_path: Path) -> None:
-    """Create and initialize functions_helpers.py with basic utilities."""
-    functions_content = '''import os
+def create_helpers(project_path: Path) -> None:
+    """Create and initialize helpers.py with basic utilities."""
+    helpers_content = '''import os
 from pathlib import Path
 
 def set_working_directory() -> Path:
@@ -130,13 +130,13 @@ if __name__ == "__main__":
     
     # Get project paths
     paths = setup_paths()
-    print("\nProject paths:")
+    print("Project paths:")
     for key, path in paths.items():
         print(f"{key}: {path}")
 '''
     
-    with open(project_path / 'functions_helpers.py', 'w') as f:
-        f.write(functions_content)
+    with open(project_path / 'helpers.py', 'w') as f:
+        f.write(helpers_content)
 
 def create_project(project_name: str, base_path: Path) -> None:
     """Create a new project with basic structure."""
@@ -157,7 +157,7 @@ def create_project(project_name: str, base_path: Path) -> None:
     (project_path / 'config.py').touch()
     
     # Create and initialize functions_helpers.py
-    create_functions_helpers(project_path)
+    create_helpers(project_path)
     
     # Create and initialize run.bash
     create_run_bash(project_path)
