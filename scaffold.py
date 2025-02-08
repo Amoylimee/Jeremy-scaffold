@@ -168,6 +168,7 @@ def create_project(project_name: str, base_path: Path) -> None:
 *
 
 # except for these files
+!README.md
 !.gitignore
 !*.py
 !*.bash'''
