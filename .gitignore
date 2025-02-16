@@ -5,3 +5,4 @@
 !.gitignore
 !README.md
 !scaffold.py
+!scaffold_package.py
