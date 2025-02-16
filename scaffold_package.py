@@ -36,6 +36,39 @@ class BaseClass(ABC):
     with open(project_path / 'src' / package_name / 'base.py', 'w') as f:
         f.write(base_content)
 
+def create_inner_file(project_path: Path, package_name: str) -> None:
+    """Create base.py with basic class structure."""
+    base_content = '''import os
+
+from pathlib import Path
+
+def _set_working_dir():
+
+    # 获取当前文件所在目录
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    parent_dir = os.path.dirname(current_dir)
+    root_dir = os.path.dirname(parent_dir)
+
+    # 切换工作目录
+    os.chdir(root_dir)
+    print(f"Set the working directory to the root dir: {root_dir}")
+
+def _get_root_dir():
+    # 获取当前文件所在目录
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    parent_dir = os.path.dirname(current_dir)
+    root_dir = os.path.dirname(parent_dir)
+    root_dir = Path(root_dir)
+    return root_dir
+
+if __name__ == "__main__":
+
+    _set_working_dir()
+    root_dir = _get_root_dir()
+'''
+    with open(project_path / 'src' / package_name / 'inner.py', 'w') as f:
+        f.write(base_content)
+
 def create_test_file(project_path: Path) -> None:
     """Create basic test file."""
     test_content = '''
@@ -149,6 +182,7 @@ def create_project_structure(project_name: str, base_path: Path) -> None:
     # Create package files
     create_init_file(project_path, project_name)
     create_base_file(project_path, project_name)
+    create_inner_file(project_path, project_name)
     create_test_file(project_path)
     create_example_file(project_path, project_name)
     
