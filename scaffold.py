@@ -3,6 +3,7 @@ import os
 import sys
 import argparse
 from pathlib import Path
+from datetime import datetime
 
 def create_run_bash(project_path: Path) -> None:
     """Create and initialize run.bash with pipeline structure."""
@@ -138,6 +139,55 @@ if __name__ == "__main__":
     with open(project_path / 'helpers.py', 'w') as f:
         f.write(helpers_content)
 
+def create_license(project_path: Path) -> None:
+    """Create LICENSE file with MIT license."""
+    current_year = datetime.now().year
+    license_content = f'''MIT License
+
+Copyright (c) {current_year} Jeremy
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+'''
+    with open(project_path / 'LICENSE', 'w') as f:
+        f.write(license_content)
+
+def create_gitignore(project_path: Path) -> None:
+    """Create .gitignore file that ignores everything except specific files."""
+    gitignore_content = '''# Ignore everything
+*
+
+# But not these files...
+!.gitignore
+!README.md
+!LICENSE
+'''
+    with open(project_path / '.gitignore', 'w') as f:
+        f.write(gitignore_content)
+
+def create_readme(project_path: Path) -> None:
+    """Create README.md with basic project information."""
+
+    readme_content = '''# Project Title'''
+
+    with open(project_path / 'README.md', 'w') as f:
+        f.write(readme_content)
+
 def create_project(project_name: str, base_path: Path) -> None:
     """Create a new project with basic structure."""
     project_path = base_path / project_name
@@ -156,8 +206,11 @@ def create_project(project_name: str, base_path: Path) -> None:
     # Create configuration file
     (project_path / 'config.py').touch()
     
-    # Create and initialize functions_helpers.py
+    # Create and initialize functions_helpers.py etc.
     create_helpers(project_path)
+    create_gitignore(project_path)
+    create_license(project_path)
+    create_readme(project_path)
     
     # Create and initialize run.bash
     create_run_bash(project_path)
